@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/x-icon" href="https://dynamic.exportersindia.com/company_logo/8181356.jpg"> 
+    <title>Millennium Semiconductors</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Search Results</h2>
+    {% if alternative_parts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>MPN</th>
+                    <th>Description</th>
+                    <!-- <th>Best Datasheet</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for part in alternative_parts %}
+                    <tr>
+                        <td>{{ part.name }}</td>
+                        <td>
+                            {% if part.bestDatasheet.url %}
+                                <a href="{{ part.bestDatasheet.url }}" target="_blank">{{part.mpn}}</a>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <!-- <td>{{ part.mpn }}</td> -->
+                        <td>{{ part.shortDescription }}</td>
+                        <!-- <td>{{ part.bestDatasheet.url }}</td> -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

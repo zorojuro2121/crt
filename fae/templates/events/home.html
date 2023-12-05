@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style_home.css">
+    <link rel="icon" type="images/x-icon" href="https://dynamic.exportersindia.com/company_logo/8181356.jpg"> 
+    <title>Millennium Semiconductors</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            padding: 60px;
+            text-align: center;
+            background: #3498db; /* Updated color */
+            color: white;
+            font-size: 30px;
+            margin-bottom: 0;
+        }
+
+        .bg-img {
+            background-image: url(""); /* Add your image URL */
+            min-height: 445px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #3498db; /* Updated color */
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 48%;
+            padding: 12px;
+            background: #3498db; /* Updated color */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.4s;
+        }
+
+        button:hover {
+            background: #2980b9; /* Hover color updated */
+        }
+
+        /* Card styling */
+        .card {
+            width: 590px; /* Adjusted size */
+            overflow: hidden;
+            transition: height 0.4s;
+            border-radius: 12px; /* Adjusted border-radius */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Added box-shadow */
+            margin: 20px auto;
+        }
+
+        .card-content {
+            padding: 20px;
+            background-color: #f4f4f4;
+            height: 5; /* Initially hidden */
+            overflow: hidden;
+            transition: height 0.4s;
+        }
+
+        .point {
+            margin: 0;
+            padding: 8px 0;
+            display: none; /* Initially hidden */
+            font-weight: bold;
+        }
+
+        .card:hover .card-content {
+            height: 290px; /* Adjust the height as needed */
+        }
+
+        .card:hover .point {
+            display: block; /* Display when card is hovered */
+        }
+
+        .card-heading {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333; /* Adjusted color */
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function submitForm() {
+          // Perform the first action: Redirect to the first URL
+          window.location.href = "{% url 'nexar_part_search' %}";
+      
+          // Perform the second action: Redirect to the second URL
+          window.location.href = "{% url 'ms_part_search' %}";
+      
+          // If you want to submit the form to the original action, you can do this
+          // document.getElementById('yourFormId').submit();
+        }
+      </script>
+</head>
+<body>
+    {% include 'events/nav2.html' %}
+
+    <h1 class="header">MS Part Search</h1>
+    <div class="bg-img">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="search_query" id="search_query" placeholder="Enter your query" required><br>
+            <div class="button-container">
+                <button class="button button1" type="submit" formaction="{% url 'nexar_part_search' %}">Search Parts</button>
+                <button class="button button1" type="submit" formaction="{% url 'ms_part_search' %}">Search MS Parts</button>
+            </div>
+        </form>
+        
+        <!-- Card -->
+        <div class="card">
+            <div class="card-content">
+                <h3 class="card-heading" style="color: red;">Format to search parts effectively</h2>
+                <!-- Points content goes here -->
+                <p class="point">1: CAP CER (capacitance) (Voltage) (Dielectric) (Case Code).</p>
+                <p class="point">2: Ind (inductance) (tolerance) (test frequency) (current rating).</p>
+                <p class="point">3: MOSFET (voltage) (current rating).</p>
+                <p class="point">4. Diodes: <b>Diode (type)(voltage)(Average Rectified Current)(Number of  pins)</b></p>
+                <p class="point">5. Thermistor: <b>Thermistor (Description)(Resistance)</b></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

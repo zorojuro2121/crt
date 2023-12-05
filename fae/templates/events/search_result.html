@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="images/x-icon" href="https://dynamic.exportersindia.com/company_logo/8181356.jpg"> 
+    <title>Millennium Semiconductors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        p {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    {% include 'events/nav_mouser.html' %}
+    <h1>Search Results for "{{ search_query }}"</h1>
+
+    {% if part_info %}
+    <table>
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>Manufacturer Part Number</th>
+                <th>Description</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for part in part_info %}
+            <tr>
+                <td>{{ part.Manufacturer }}</td>
+                <td>
+                    {% if part.DataSheetUrl %}
+                        <a href="{{ part.DataSheetUrl }}" target="_blank">{{ part.ManufacturerPartNumber }}</a>
+                    {% else %}
+                        {{ part.ManufacturerPartNumber }}
+                    {% endif %}
+                </td>
+                <td>{{ part.Description }}</td>
+                <td>{{ part.Category }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

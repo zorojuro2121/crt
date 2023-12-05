@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        p {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Combined Results</h1>
+
+
+<h2>Nexar Results</h2>
+{% if nexar_results %}  
+    <table>
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>MPN</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in nexar_results %}
+                <tr>
+                    <td>{{ result.manufacturer_name }}</td>
+                    <td>
+                        {% if result.bestDatasheet_url %}
+                            <a href="{{ result.bestDatasheet_url }}" target="_blank">{{result.mpn}}</a>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>{{ result.shortDescription }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No Nexar results found.</p>
+{% endif %}
+
+<h2>Mouser Results</h2>
+{% if mouser_results %}
+    <table>
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>MPN</th>
+                <th>Description</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in mouser_results %}
+                <tr>
+                    <td>{{ result.manufacturer }}</td>
+                    <td>
+                        {% if result.datasheet_url %}
+                            <a href="{{ result.datasheet_url }}" target="_blank">{{ result.manufacturerPartNumber }}</a>
+                        {% else %}
+                            {{ result.manufacturerPartNumber }}
+                        {% endif %}
+                    </td>
+                    <td>{{ result.description }}</td>
+       
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No Mouser results found.</p>
+{% endif %}
+
+</body>
+</html>

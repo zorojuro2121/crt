@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="images/x-icon" href="https://dynamic.exportersindia.com/company_logo/8181356.jpg"> 
+    <title>Millennium Semiconductors</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-size: cover;
+            background-position: 100px;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        #navbar {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 50px;
+            margin-bottom: 0px;
+            font-size: 36px;
+            background-color: purple; /* Background color for the heading */
+            color: #fff; /* Text color for the heading */
+            padding: 50px; /* Padding to give some space around the text */
+            border-radius: 5px; /* Optional: Rounded corners for the heading */
+        }
+
+        form {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        {% include 'events/nav3.html' %}
+    </div>
+    <h1>Millennium Semiconductors</h1>
+    <form method="post" action="{% url 'search_mouser' %}">
+        {% csrf_token %}
+        <label for="search_query">Search Query:</label>
+        <input type="text" id="search_query" name="search_query" required>
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

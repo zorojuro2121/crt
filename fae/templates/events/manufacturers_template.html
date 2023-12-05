@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="images/x-icon" href="https://dynamic.exportersindia.com/company_logo/8181356.jpg"> 
+    <title>Millennium Semiconductors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        p {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Search Results for "{{ search_query }}"</h1>
+
+    {% if manufacturers %}
+    <table>
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>Manufacturer Part Number</th>
+                <th>Description</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for manufacturer in manufacturers %}
+            <tr>
+                <td>{{ manufacturer.manufacturer_name }}</td>
+                <td>
+                    {% if manufacturer.bestDatasheet_url %}
+                        <a href="{{ manufacturer.bestDatasheet_url }}" target="_blank">{{ manufacturer.mpn }}</a>
+                    {% else %}
+                        {{ manufacturer.mpn }}
+                    {% endif %}
+                </td>
+                <td>{{ manufacturer.shortDescription }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+</body>
+</html>
