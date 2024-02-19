@@ -6,114 +6,525 @@
     <title>Combined Results</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background: #F1F1F2;
+            font-family: 'Open Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
+        
+        .search {
+            width: 520px; /* Increased width */
+            height: 30px; /* Increased height */
+            position: fixed;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background-color: #E3DFFD;
+            border-radius: 20px; /* Adjusted border radius */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 8px; /* Increased padding */
+            transition: all 0.3s ease; /* Smooth transition on all properties */
+        }
+    
+        .searchTerm {
+            width: calc(100% - 100px); /* Adjusted width */
+            height: 20px;
+            border: none;
+            outline: none;
+            font-size: 14px; /* Increased font size */
+            color: #000000;
+            background-color: #E3DFFD;
+        }
+        .searchButton {
+            top: 5px;
+            width: 80px;
+            height: 30px;
+            background: #81689D;
+            color: #ffffff;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+        
+        .searchButton:hover {
+            background-color: #694e7b; /* Darker color on hover */
+        }
+    
+        .wrap {
+            margin-top: 70px; /* Adjusted margin top */
+            padding: 20px;
+        }
+    
+        .add {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #81689D;
+            color: white;
+            padding: 12px 18px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+    
+        .add:hover {
+            background-color: #694e7b; /* Darker color on hover */
+        }
+    
         h1 {
             text-align: center;
             color: #333;
         }
-
+    
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px auto;
         }
-
+    
         table, th, td {
             border: 1px solid #333;
         }
-
+    
         th, td {
             padding: 10px;
             text-align: left;
         }
-
+    
         th {
-            background-color: #f2f2f2;
+            background-color: #81689D;
         }
-
+    
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
+    
         tr:nth-child(odd) {
             background-color: #fff;
         }
-
+    
         p {
             text-align: center;
             font-weight: bold;
             color: #333;
         }
+    
+        .centered-title {
+            text-align: center;
+            color: black;
+            font-size: 40px;
+            margin-top: -30px;
+        }
+    
+        .filter-form {
+            text-align: center;
+            margin-top: 18px;
+        }
+    
+        .filter-form label {
+            font-size: 12px;
+            color: #333;
+        }
+    
+        .filter-form select {
+            padding: 6px;
+            border-radius: 2px;
+            border: 1px solid #ccc;
+            margin-right: 6px;
+            font-size: 12px;
+        }
+    
+        .apply-filter {
+            background-color: #81689D;
+            color: white;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+    
+        .apply-filter:hover {
+            background-color: #694e7b; /* Darker color on hover */
+        }
+    
+        .reset-button {
+            background-color: #E3DFFD;
+            color: #E64848;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+    
+        .reset-button:hover {
+            color: #E3DFFD;
+            background-color: #E64848;
+        }
+        .radios{
+            background-color:  #E3DFFD;
+        }
+        .radios:hover{
+            background-color: #AC87C5;
+        }
+        .item {
+            width: max-content;
+            display: inline;
+            border: 0;
+        }
+
+        .item li {
+            list-style: none;
+            width: max-content;
+        }
+
+        .scrollable-dropdown-list {
+            position: absolute;
+            max-height: 200px;
+            width: 33%;
+            overflow-y: scroll;
+            overflow-x: auto;
+            margin: 0;
+            padding-left: 1em;
+            border-style: solid;
+            border-width: thin;
+            border-color: black;
+            background-color: #E3DFFD;
+        }
+
+        legend {
+            margin-bottom: 0;
+            font-size: 18px;
+            display: inline-block;
+            width:150px;
+            background-color: #AC87C5;
+            padding: 5px 8px;
+            border-radius: 5%;
+        }
+        legend:hover{
+            background-color: #81689D;
+        }
+        label {
+            font-weight: normal;
+            margin-left: 20px;
+            color: black; /* Match the color of the label in the first form */
+            width: max-content;
+        }
+        li {
+            width: max-content;
+        }
+        label:hover{
+            color:#694e7b;
+        }
+
+        .legend-container {
+            cursor: pointer;
+            padding: 10px 20px;
+            width: 28%;
+            padding: 0;
+            margin: 0px;
+            color: black; /* Match the color of the legend in the first form */
+            border: 1;
+            border-color: #000000;
+            border-bottom: none;
+        }
+
+        fieldset {
+            border-width: thin;
+            border-color: gray;
+            border-style: solid;
+            width: auto;
+            text-align: center;
+            display: inline;
+            margin: 0%;
+        }
+
+
+        /* Note that all the browser-specific animation stuff is totally optional, but provides a nice subtle animation for the dropdown effect */
+
+        fieldset ul.scrollable-dropdown-list {
+            display: none;
+            -webkit-animation: slide-down .3s ease-out;
+            -moz-animation: slide-down .3s ease-out;
+        }
+
+        fieldset.selected ul.scrollable-dropdown-list {
+            display: block;
+            -webkit-animation: slide-down .3s ease-out;
+            -moz-animation: slide-down .3s ease-out;
+        }
+
+        @-webkit-keyframes slide-down {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateY(-10%);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateY(0);
+            }
+        }
+
+        @-moz-keyframes slide-down {
+            0% {
+                opacity: 0;
+                -moz-transform: translateY(-10%);
+            }
+
+            100% {
+                opacity: 1;
+                -moz-transform: translateY(0);
+            }
+        }
+        .download-button {
+            display: inline-block;
+            background-color: #83BD75;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .download-button:hover {
+            background-color: #4E944F;
+        }
+
+
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Listener for when you click on the dropdown menu
+            $('fieldset.toggle-item > .legend-container').on('click', (event) => {
+                // Adds or removes the 'selected' attribute on the dropdown menu you clicked
+                $(event.currentTarget).parent().toggleClass('selected');
+                // If you have multiple dropdown menus you may want it so that when you open Menu B, Menu A
+                // automatically closes.
+                // This line does that by removing 'selected' from every dropdown menu other than the one you clicked on.
+                // It's 'optional' but it definitely feels better if you have it
+                $('fieldset.toggle-item').not($(event.currentTarget).parent()).removeClass('selected');
+            });
+    
+            // The user is probably going to expect that any and all dropdown menus will close if they click outside of them. Here's how to make that happen:
+            //This listens for whenever you let go of the mouse
+            $(document).mouseup(function(e) {
+                // make this a variable just to make the next line a little easier to read
+                // a 'container' is now any
+                var dropdown_menus = $("fieldset.toggle-item");
+    
+                // if the target of the click isn't a dropdown menu OR any of the elements inside one of them
+                if (!dropdown_menus.is(e.target) && dropdown_menus.has(e.target).length === 0) {
+                    // then it will de-select (thereby closing) all the dropdown menus on the page
+                    $('fieldset.toggle-item').removeClass('selected');
+                }
+            });
+        });
+    </script>
+    
 </head>
 <body>
+    <div class="wrap">
+        <form class="search" method="post" action="{% url 'search_all' %}">
+            {% csrf_token %}
+            <input type="text" class="searchTerm" name="search_query" placeholder="{{ search_query }}">
+            <button class="searchButton" type="submit">Search</button>
+        </form>
+    </div>
+    <a href="{% url 'download_sheet' %}?filtered=true" class="download-button">Download Combined Results</a>
 
-<h1>Combined Results</h1>
+    <form method="post" action="{% url 'filter' %}" class="filter-form">
+        {% csrf_token %}
+        <!-- Manufacturers -->
+        <fieldset class="item toggle-item">
+            <div class="legend-container">
+                <legend class="manufacturer_legend" >Manufacturers</legend>
+            </div>
+            <ul class="scrollable-dropdown-list">
+                {% for manufacturer_name in manufacturer_list %}
+                <li>
+                    <input type="checkbox" class="manufacturer-checkbox" name="manufacturers" value="{{ manufacturer_name }}">
+                    <label>{{ manufacturer_name }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+        </fieldset>
+    
+        <!-- MPNs -->
+        <fieldset class="item toggle-item">
+            <div class="legend-container">
+                <legend class="mpn_legend" >mpns</legend>
+            </div>
+            <ul class="scrollable-dropdown-list">
+                {% for mpn in mpn_list %}
+                <li>
+                    <input type="checkbox" class="mpn-checkbox" name="mpns" value="{{ mpn }}">
+                    <label>{{ mpn }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+        </fieldset>
+    
+        <!-- Sources -->
+        <fieldset class="item toggle-item">
+            <div class="legend-container">
+                <legend class="source_legend" >Sources</legend>
+            </div>
+            <ul class="scrollable-dropdown-list">
+                {% for source in source_list %}
+                <li>
+                    <input type="checkbox" class="source-checkbox" name="sources" value="{{ source }}">
+                    <label>{{ source }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+        </fieldset>
+    
+        <div>
+            <button type="submit" class="apply-filter">Apply Filter</button>
+            <button type="submit" class="reset-button" name="reset">Reset</button>
+        </div>
+    </form>
+    
+    
 
+    <form method="post" action="{% url 'upload_checked_parts' %}">
+        {% csrf_token %}
 
-<h2>Nexar Results</h2>
-{% if nexar_results %}  
-    <table>
-        <thead>
-            <tr>
-                <th>Manufacturer</th>
-                <th>MPN</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in nexar_results %}
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ result.manufacturer_name }}</td>
-                    <td>
-                        {% if result.bestDatasheet_url %}
-                            <a href="{{ result.bestDatasheet_url }}" target="_blank">{{result.mpn}}</a>
-                        {% else %}
-                            N/A
-                        {% endif %}
-                    </td>
-                    <td>{{ result.shortDescription }}</td>
+                    <th>Select</th>
+                    <th>Make</th>
+                    <th>MPN</th>
+                    <th>Description</th>
+                    <th>Source</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>No Nexar results found.</p>
-{% endif %}
-
-<h2>Mouser Results</h2>
-{% if mouser_results %}
-    <table>
-        <thead>
-            <tr>
-                <th>Manufacturer</th>
-                <th>MPN</th>
-                <th>Description</th>
-              
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in mouser_results %}
+            </thead>
+            <tbody>
+                <!-- Nexar Results -->
+                {% for result in nexar_results %}
                 <tr>
-                    <td>{{ result.manufacturer }}</td>
                     <td>
-                        {% if result.datasheet_url %}
-                            <a href="{{ result.datasheet_url }}" target="_blank">{{ result.manufacturerPartNumber }}</a>
+                        <input type="checkbox" name="selectedParts[]" value="{{ result.mpn }}|{{ result.make }}|{{ result.description }}|{{ result.datasheet }}|{{ search_query}} ">
+                    </td>
+                    <td>{{ result.make }}</td>
+                    <td>
+                        {% if result.datasheet %}
+                            <a href="{{ result.datasheet }}" target="_blank">{{ result.mpn }}</a>
                         {% else %}
-                            {{ result.manufacturerPartNumber }}
+                            {{ result.mpn }}
                         {% endif %}
                     </td>
                     <td>{{ result.description }}</td>
-       
+                    <td>Nexar</td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>No Mouser results found.</p>
-{% endif %}
+                {% endfor %}
+                <!-- Digikye Results -->
+                {% for result in digikey_results %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedParts[]" value="{{ result.mpn }}|{{ result.make }}|{{ result.description }}|{{ result.datasheet }}|{{ search_query}} ">
+                    </td>
+                    <td>{{ result.make }}</td>
+                    <td>
+                        {% if result.bestDatasheet %}
+                            <a href="{{ result.datasheet }}" target="_blank">{{ result.mpn }}</a>
+                        {% else %}
+                            {{ result.mpn }}
+                        {% endif %}
+                    </td>
+                    <td>{{ result.description }}</td>
+                    <td>Digikey</td>
+                </tr>
+                {% endfor %}
+                <!-- MS xREF Results -->
+                {% for result in irc_results %}
+                <tr>
+                    <td></td>
+                    <td>{{ result.name|default:"N/A" }}</td>
+                    <td>
+                        {% if result.datasheet %}
+                        <a href="{{ result.datasheet }}" target="_blank">{{ result.mpn }}</a>
+                        {% else %}
+                        {{ result.mpn }}
+                        {% endif %}
+                    </td>
+                    <td>{{ result.short_description|default:"N/A" }}</td>
+                    <td>MS xREF</td>
+                </tr>
+                {% endfor %}
 
+
+                <!-- Mouser Results -->
+                {% for result in mouser_results %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedParts[]" value="{{ result.mpn }}|{{ result.make }}|{{ result.description }}|{{ result.datasheet }}|{{ search_query}}">
+                    </td>
+                    <td>{{ result.make }}</td>
+                    <td>
+                        {% if result.datasheet %}
+                            <a href="{{ result.datasheet }}" target="_blank">{{ result.mpn }}</a>
+                        {% else %}
+                            {{ result.mpn }}
+                        {% endif %}
+                    </td>
+                    <td>{{ result.description }}</td>
+                    <td>Mouser</td>
+                </tr>
+                {% endfor %}
+
+                <!-- NEXAR ALTERNATIVE Results -->
+                {% for part in nexar_alt_results %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedParts[]" value="{{ result.mpn }}|{{ result.make }}|{{ result.description }}|{{ result.datasheet }}|{{ search_query}} ">
+                    </td>
+                    <td>{{ make }}</td>
+                    <td>
+                        {% if result.datasheet %}
+                            <a href="{{ result.datasheet }}" target="_blank">{{ result.mpn }}</a>
+                        {% else %}
+                            {{ result.mpn }}
+                        {% endif %}
+                    </td>
+                    <td>{{ result.description }}</td>
+                    <td>Nexar alt</td>
+                </tr>
+                {% endfor %}
+                <!-- Quoted Results -->
+                {% if quoted %}
+                    {% for result in quoted %}
+                    <tr class="quoted">
+                        <td>
+                            <input type="checkbox" name="selectedParts[]" value="{{ mpn }}|{{ part.}}|{{ shortDescription }}|{{ bestDatasheet.url }}|{{ search_query }}">
+                        </td>
+                        <b>
+                            <td>{{ result.make }}</td>
+                            <td>{{ result.mpn }}</td>
+                            <td></td>
+                            <td>Quoted</td>
+                        </b>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            
+            </tbody>
+
+        <button class="add" type="submit">Add to CR</button>
+    </form>
 </body>
 </html>
